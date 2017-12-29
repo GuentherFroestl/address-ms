@@ -1,9 +1,12 @@
 import * as Koa from 'koa';
 import * as Router from 'koa-router';
 import * as Cors from 'koa2-cors';
+import * as KoaLogger from 'koa-logger';
 import { Server } from 'http';
 //import {DatabaseSpecification} from "../entity/database-specification";
 import {healthCheck} from "../control/health-check";
+import {countryRouter} from "./countries-resource";
+import {zipsRouter} from "./zips-resource";
 
 const mainRouter = new Router();
 
@@ -19,7 +22,13 @@ export class AddressService{
 
         mainRouter.get('/healthcheck', healthCheck);
 
+        const paramLoggingMW = async(ctx,ntx) =>{
+            console.log('parameters:',ctx.params);
+            console.log('query', ctx.query);
+        };
+
         this.restApp
+            .use(KoaLogger())
             .use(Cors({
                 exposeHeaders: [
                     'Accept',
@@ -35,13 +44,18 @@ export class AddressService{
                 ]
             }))
             .use(mainRouter.routes())
-            .use(mainRouter.allowedMethods());
-
+            .use(mainRouter.allowedMethods())
+            .use(countryRouter.routes())
+            .use(countryRouter.allowedMethods())
+            .use(zipsRouter.routes())
+            .use(zipsRouter.allowedMethods())
+            .use(paramLoggingMW)
+        ;
     }
 
     listen = () => {
         this.service = this.restApp.listen(this.port, () => {
-            console.info(`REST Service started on http://localhost:${this.port}`);
+            console.info(`Address REST Service started on http://localhost:${this.port}`);
         });
     };
     close = () => {

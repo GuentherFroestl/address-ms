@@ -9,7 +9,6 @@ const PORT = 3000;
 function start(): void {
   let argv = minimist(process.argv.slice(2));
   let port = argv.p || PORT;
-  console.info(`port:${port.toString()}`);
   let app = new AddressService(port);
   app.listen();
 }
