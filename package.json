@@ -7,7 +7,8 @@
     "compile": "tsc",
     "test": "echo \"Error: no test specified\" && exit 1",
     "serve": "tsc && node --harmony ./dist/bootstrap/bootstrap.js -p 3000",
-    "start": "npm run serve"
+    "start": "npm run serve",
+    "sequelize:init": "tsc && node --harmony ./dist/bootstrap/database-init.js"
   },
   "repository": {
     "type": "git",
@@ -32,7 +33,10 @@
     "pg": "^6.4.2",
     "pg-hstore": "^2.3.2",
     "pkginfo": "^0.4.1",
-    "sequelize": "^4.28.6"
+    "reflect-metadata": "^0.1.10",
+    "sequelize": "^4.28.6",
+    "sequelize-typescript": "^0.6.2",
+    "sqlite3": "^3.1.13"
   },
   "devDependencies": {
     "@types/jasmine": "^2.8.2",

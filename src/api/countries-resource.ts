@@ -1,5 +1,5 @@
 import * as KoaRouter from 'koa-router';
-import {zipsRouter} from "./zips-resource";
+import {zipsRouter} from './zips-resource';
 
 export const countryRouter = new KoaRouter({
     prefix: '/countries'
