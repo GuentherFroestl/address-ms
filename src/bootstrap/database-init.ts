@@ -11,6 +11,7 @@ const config = {
 
 
 export async function initDbAsync(){
+    console.log('initDbAsync');
     try {
         const sequelize =  new Sequelize(config);
         await sequelize.authenticate();
@@ -24,7 +25,3 @@ export async function initDbAsync(){
         console.error('Error happend during db init, with config:\n',config,'\n', err);
     }
 }
-
-initDbAsync()
-    .then(()=> console.log('init successful --------------'))
-    .catch((err) =>{console.error('init returned error\n',err,'\n----------------------')});

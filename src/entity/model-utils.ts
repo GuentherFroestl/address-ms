@@ -10,6 +10,7 @@ import {District} from './district.model';
 import {SubLocation} from './sub-location';
 
 export function addAllModels(seq: Sequelize):void{
+    console.log('add models to Sequelize');
     seq.addModels([
         Country,
         Zip,
@@ -24,5 +25,6 @@ export function addAllModels(seq: Sequelize):void{
 }
 
 export async function syncAllModels(seq: Sequelize,options: any):Promise<void>{
+    console.log('sync models to DB');
     await seq.sync(options);
 }
