@@ -4,9 +4,10 @@ import * as Cors from 'koa2-cors';
 import * as KoaLogger from 'koa-logger';
 import { Server } from 'http';
 import {healthCheck} from '../control/health-check';
-import {countryRouter} from './countries-resource';
-import {zipsRouter} from './zips-resource';
+import {CountriesResource} from './countries-resource';
+import {ZipsResource} from './zips-resource';
 import {exceptionHandler} from "./exception-handler";
+import {CitiesResource} from "./cities-resource";
 
 const mainRouter = new Router();
 
@@ -15,6 +16,9 @@ export class AddressService{
 
     restApp: Koa;
     service: Server;
+    countriesResource = new CountriesResource('/countries');
+    cityResource= new CitiesResource('/cities');
+    zipsResource = new ZipsResource('/zips');
 
     constructor(private port = 3000) {
 
@@ -46,10 +50,12 @@ export class AddressService{
             }))
             .use(mainRouter.routes())
             .use(mainRouter.allowedMethods())
-            .use(countryRouter.routes())
-            .use(countryRouter.allowedMethods())
-            .use(zipsRouter.routes())
-            .use(zipsRouter.allowedMethods())
+            .use(this.countriesResource.router.routes())
+            .use(this.countriesResource.router.allowedMethods())
+            .use(this.zipsResource.router.routes())
+            .use(this.zipsResource.router.allowedMethods())
+            .use(this.cityResource.router.routes())
+            .use(this.cityResource.router.allowedMethods())
             .use(paramLoggingMW)
         ;
     }

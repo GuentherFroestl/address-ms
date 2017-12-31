@@ -1,26 +1,11 @@
-import * as KoaRouter from 'koa-router';
+import {AbstractResource} from "./abstract-resource";
+import {Zip} from "../entity";
+import {ZipsStore} from "../control/zips-store";
+import {AbstractStore} from "../control/abstract-store";
 
-export const zipsRouter = new KoaRouter({
-    prefix: '/zips'
-});
+export class ZipsResource extends AbstractResource<Zip>{
 
-
-zipsRouter.get('/', async(ctx, next) => {
-    ctx.body = [
-        {   uuid: '1234-5678',
-            name: '82110'},
-        {   uuid: '1234-8798',
-            name: '81099'}
-        ];
-    await next();
-
-});
-
-zipsRouter.get('/:id', async(ctx, next) => {
-    ctx.body =
-        {   uuid: ctx.params.id,
-            name: 'Whatever Zip'}
-    ;
-    await next();
-
-});
+    protected getStore(): AbstractStore<Zip> {
+        return new ZipsStore();
+    }
+}
