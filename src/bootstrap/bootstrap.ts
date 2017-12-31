@@ -1,4 +1,5 @@
 import { AddressService } from '../api/address-rest-service';
+import {initDbAsync} from "./database-init";
 
 const minimist = require('minimist');
 const PORT = 3000;
@@ -16,4 +17,5 @@ function start(): void {
 /**
  * bootstrap.
  */
-start();
+initDbAsync().then(() => start())
+    .catch((err) =>{console.error('init returned error\n',err,'\n----------------------')});

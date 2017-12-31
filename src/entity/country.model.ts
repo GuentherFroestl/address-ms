@@ -1,8 +1,22 @@
 import {BaseEntity} from './base-entity.model';
-import {Table, Column, Unique} from 'sequelize-typescript';
+import {Table, Column, Unique, Model, UpdatedAt, PrimaryKey, IsUUID, CreatedAt, NotNull} from 'sequelize-typescript';
 
 @Table
-export class Country extends BaseEntity{
+export class Country extends Model<Country> implements BaseEntity{
+
+    @IsUUID(4)
+    @PrimaryKey
+    @Column
+    uuid: string;
+
+    @Column
+    name: String;
+
+    @CreatedAt
+    createdAt: Date;
+
+    @UpdatedAt
+    updatedAt: Date;
 
     @Unique
     @Column
@@ -15,5 +29,7 @@ export class Country extends BaseEntity{
     @Unique
     @Column
     isoNumber: number;
+
+
 
 }

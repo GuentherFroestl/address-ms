@@ -1,5 +1,5 @@
 import {Sequelize} from 'sequelize-typescript';
-import {Country, addAllModels, syncAllModels} from '../entity';
+import {addAllModels, syncAllModels} from '../entity';
 
 const config = {
     database: 'some_db',
@@ -10,14 +10,14 @@ const config = {
 };
 
 
-async function initAsync(){
+export async function initDbAsync(){
     try {
         const sequelize =  new Sequelize(config);
         await sequelize.authenticate();
         console.log('Connection has been established successfully, with config:\n',config);
         addAllModels(sequelize);
         console.log('Creating database schema ......');
-        await syncAllModels({force: true});
+        await syncAllModels(sequelize,{force: true});
         console.log('Schema and Entities have been created successful');
     }
     catch(err){
@@ -25,6 +25,6 @@ async function initAsync(){
     }
 }
 
-initAsync()
+initDbAsync()
     .then(()=> console.log('init successful --------------'))
     .catch((err) =>{console.error('init returned error\n',err,'\n----------------------')});

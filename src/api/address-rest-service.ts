@@ -3,10 +3,10 @@ import * as Router from 'koa-router';
 import * as Cors from 'koa2-cors';
 import * as KoaLogger from 'koa-logger';
 import { Server } from 'http';
-//import {DatabaseSpecification} from '../entity/database-specification';
 import {healthCheck} from '../control/health-check';
 import {countryRouter} from './countries-resource';
 import {zipsRouter} from './zips-resource';
+import {exceptionHandler} from "./exception-handler";
 
 const mainRouter = new Router();
 
@@ -29,6 +29,7 @@ export class AddressService{
 
         this.restApp
             .use(KoaLogger())
+            .use(exceptionHandler)
             .use(Cors({
                 exposeHeaders: [
                     'Accept',
