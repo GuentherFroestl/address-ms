@@ -3,24 +3,34 @@ import * as Router from 'koa-router';
 import * as Cors from 'koa2-cors';
 import * as KoaLogger from 'koa-logger';
 import { Server } from 'http';
-import {healthCheck} from '../control/health-check';
+import {healthCheck} from '../control';
 import {CountriesResource} from './countries-resource';
 import {ZipsResource} from './zips-resource';
 import {exceptionHandler} from "./exception-handler";
 import {CitiesResource} from "./cities-resource";
+import {DirectionsResource} from "./directions-resource";
+import {DistrictsResource} from "./districts-resource";
+import {LocationsResource} from "./locations-resource";
+import {StreetsResource} from "./streets-resource";
+import {SubLocationsResource} from "./sub-locations-resource";
 
 const mainRouter = new Router();
 
 
 export class AddressService{
 
-    restApp: Koa;
-    service: Server;
-    countriesResource = new CountriesResource('/countries');
-    cityResource= new CitiesResource('/cities');
-    zipsResource = new ZipsResource('/zips');
+    protected restApp: Koa;
+    protected service: Server;
+    protected countriesResource = new CountriesResource('/countries');
+    protected cityResource= new CitiesResource('/cities');
+    protected zipsResource = new ZipsResource('/zips');
+    protected directionsResource = new DirectionsResource('/directions');
+    protected districtsResource = new DistrictsResource('/districts');
+    protected locationsResource = new LocationsResource('/locations');
+    protected streetsResource = new StreetsResource('/streets');
+    protected subLocationsResource = new SubLocationsResource('/sub-locations');
 
-    constructor(private port = 3000) {
+    constructor(protected port = 3000) {
 
         this.restApp = new Koa();
 
@@ -50,12 +60,23 @@ export class AddressService{
             }))
             .use(mainRouter.routes())
             .use(mainRouter.allowedMethods())
-            .use(this.countriesResource.router.routes())
-            .use(this.countriesResource.router.allowedMethods())
-            .use(this.zipsResource.router.routes())
-            .use(this.zipsResource.router.allowedMethods())
             .use(this.cityResource.router.routes())
             .use(this.cityResource.router.allowedMethods())
+            .use(this.countriesResource.router.routes())
+            .use(this.countriesResource.router.allowedMethods())
+            .use(this.directionsResource.router.routes())
+            .use(this.directionsResource.router.allowedMethods())
+            .use(this.districtsResource.router.routes())
+            .use(this.districtsResource.router.allowedMethods())
+            .use(this.locationsResource.router.routes())
+            .use(this.locationsResource.router.allowedMethods())
+            .use(this.streetsResource.router.routes())
+            .use(this.streetsResource.router.allowedMethods())
+            .use(this.subLocationsResource.router.routes())
+            .use(this.subLocationsResource.router.allowedMethods())
+            .use(this.zipsResource.router.routes())
+            .use(this.zipsResource.router.allowedMethods())
+
             .use(paramLoggingMW)
         ;
     }

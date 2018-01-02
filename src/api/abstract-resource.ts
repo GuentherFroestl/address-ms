@@ -1,4 +1,4 @@
-import {AbstractStore} from "../control/abstract-store";
+import {AbstractStore} from "../control";
 import {BaseEntity, DomainQuery} from "../entity";
 import * as KoaRouter from 'koa-router';
 import * as KoaBody from 'koa-body';

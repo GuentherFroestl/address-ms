@@ -1,7 +1,6 @@
 import {AbstractResource} from "./abstract-resource";
 import {Zip} from "../entity";
-import {ZipsStore} from "../control/zips-store";
-import {AbstractStore} from "../control/abstract-store";
+import {AbstractStore, ZipsStore} from "../control";
 
 export class ZipsResource extends AbstractResource<Zip>{
 

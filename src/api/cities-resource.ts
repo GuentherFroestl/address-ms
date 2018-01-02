@@ -1,7 +1,6 @@
 import {AbstractResource} from "./abstract-resource";
 import {City} from "../entity";
-import {CitiesStore} from "../control/cities-store";
-import {AbstractStore} from "../control/abstract-store";
+import {AbstractStore, CitiesStore} from "../control";
 
 
 export class CitiesResource extends AbstractResource<City>{

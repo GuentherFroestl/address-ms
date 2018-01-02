@@ -1,7 +1,6 @@
-import {CountryStore} from "../control/countries-store";
+import {AbstractStore, CountryStore} from "../control";
 import {Country, DomainQuery} from "../entity";
 import {AbstractResource} from "./abstract-resource";
-import {AbstractStore} from "../control/abstract-store";
 
 export class CountriesResource extends AbstractResource<Country>{
 
