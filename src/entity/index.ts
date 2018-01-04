@@ -1,5 +1,6 @@
 export * from './base-entity.model';
 export * from './country.model';
+export * from './state.model';
 export * from './zip.model';
 export * from './database-specification';
 export * from './model-utils';

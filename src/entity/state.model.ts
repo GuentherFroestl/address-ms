@@ -1,12 +1,12 @@
 import {
-    Table, Column, BelongsTo, ForeignKey, Model, UpdatedAt, PrimaryKey, IsUUID,
+    Table, Column, ForeignKey, BelongsTo, Model, UpdatedAt, PrimaryKey, IsUUID,
     CreatedAt, AllowNull
 } from 'sequelize-typescript';
 import {BaseEntity} from './base-entity.model';
-import {City} from './city.model';
+import {Country} from './country.model';
 
 @Table
-export class District extends Model<District> implements  BaseEntity{
+export class State extends Model<State> implements BaseEntity{
 
     @AllowNull(false)
     @IsUUID(4)
@@ -24,12 +24,12 @@ export class District extends Model<District> implements  BaseEntity{
     @UpdatedAt
     updatedAt: Date;
 
-
     @AllowNull(false)
-    @ForeignKey(() => City)
+    @ForeignKey(() => Country)
     @Column
-    cityUuid: string;
+    countryUuid: string;
 
-    @BelongsTo(() => City)
-    city: City;
+    @BelongsTo(() => Country)
+    country: Country;
+
 }

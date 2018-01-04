@@ -1,6 +1,6 @@
 import {
     Table, Column, Unique, BelongsTo, ForeignKey, HasOne, Model, UpdatedAt, PrimaryKey,
-    IsUUID, CreatedAt
+    IsUUID, CreatedAt, AllowNull
 } from 'sequelize-typescript';
 import {BaseEntity} from './base-entity.model';
 import {Street} from './street.model';
@@ -9,11 +9,13 @@ import {Direction} from './direction.model';
 @Table
 export class Location extends Model<Location> implements  BaseEntity{
 
+    @AllowNull(false)
     @IsUUID(4)
     @PrimaryKey
     @Column
     uuid: string;
 
+    @AllowNull(false)
     @Column
     name: String;
 
@@ -25,9 +27,10 @@ export class Location extends Model<Location> implements  BaseEntity{
     @Column
     number: string;
 
+    @AllowNull(false)
     @ForeignKey(() => Street)
     @Column
-    cityUuid: string;
+    streetUuid: string;
 
     @BelongsTo(() => Street)
     street: Street;
