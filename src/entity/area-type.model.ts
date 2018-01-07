@@ -1,15 +1,12 @@
 import {
     Table, Column, ForeignKey, BelongsTo, Model, UpdatedAt, PrimaryKey, IsUUID,
-    CreatedAt, AllowNull, BelongsToMany
+    CreatedAt, AllowNull
 } from 'sequelize-typescript';
 import {BaseEntity} from './base-entity.model';
 import {Country} from './country.model';
-import {AdminArea} from "./admin-area.model";
-import {ZipCity} from "./zip-city.model";
-import {Zip} from "./zip.model";
 
 @Table
-export class City extends Model<City> implements BaseEntity{
+export class AreaType extends Model<AreaType>{
 
     @AllowNull(false)
     @IsUUID(4)
@@ -28,6 +25,10 @@ export class City extends Model<City> implements BaseEntity{
     updatedAt: Date;
 
     @AllowNull(false)
+    @Column
+    level: number;
+
+    @AllowNull(false)
     @ForeignKey(() => Country)
     @Column
     countryUuid: string;
@@ -35,13 +36,4 @@ export class City extends Model<City> implements BaseEntity{
     @BelongsTo(() => Country)
     country: Country;
 
-    @BelongsToMany(() => Zip, () => ZipCity)
-    zips: Zip[];
-
-    @ForeignKey(() => AdminArea)
-    @Column
-    adminAreaUuid: string;
-
-    @BelongsTo(() => AdminArea)
-    adminArea: AdminArea;
 }

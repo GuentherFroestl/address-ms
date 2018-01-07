@@ -4,9 +4,10 @@ import {
 } from 'sequelize-typescript';
 import {BaseEntity} from './base-entity.model';
 import {Country} from './country.model';
+import {AreaType} from "./area-type.model";
 
 @Table
-export class State extends Model<State> implements BaseEntity{
+export class AdminArea extends Model<AdminArea> implements BaseEntity{
 
     @AllowNull(false)
     @IsUUID(4)
@@ -25,11 +26,27 @@ export class State extends Model<State> implements BaseEntity{
     updatedAt: Date;
 
     @AllowNull(false)
+    @ForeignKey(() => AreaType)
+    @Column
+    areaTypeUuid: string;
+
+    @BelongsTo(() => AreaType)
+    areaType: AreaType;
+
+    @AllowNull(false)
     @ForeignKey(() => Country)
     @Column
     countryUuid: string;
 
     @BelongsTo(() => Country)
     country: Country;
+
+    @AllowNull(false)
+    @ForeignKey(() => AdminArea)
+    @Column
+    adminAreaUuid: string;
+
+    @BelongsTo(() => AdminArea)
+    adminArea: AdminArea;
 
 }

@@ -1,8 +1,6 @@
 import {Country} from '../entity';
 import {AbstractStore} from "./abstract-store";
 
-
-
 export class CountryStore extends AbstractStore<Country>{
 
     protected async findAllInStore(findOpt: any): Promise<Country[]> {

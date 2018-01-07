@@ -8,13 +8,15 @@ import {Direction} from './direction.model';
 import {Location} from './location.model';
 import {District} from './district.model';
 import {SubLocation} from './sub-location';
-import {State} from "./state.model";
+import {AdminArea} from "./admin-area.model";
+import {AreaType} from "./area-type.model";
 
 export function addAllModels(seq: Sequelize):void{
     console.log('add models to Sequelize');
     seq.addModels([
         Country,
-        State,
+        AreaType,
+        AdminArea,
         Zip,
         Street, 
         City,

@@ -6,7 +6,7 @@ import {BaseEntity} from './base-entity.model';
 import {Country} from './country.model';
 import {City} from './city.model';
 import {ZipCity} from './zip-city.model';
-import {State} from "./state.model";
+import {AdminArea} from "./admin-area.model";
 
 @Table
 export class Zip extends Model<Zip> implements BaseEntity {
@@ -36,12 +36,12 @@ export class Zip extends Model<Zip> implements BaseEntity {
     @BelongsTo(() => Country)
     country: Country;
 
-    @ForeignKey(() => State)
+    @ForeignKey(() => AdminArea)
     @Column
     stateUuid: string;
 
-    @BelongsTo(() => State)
-    state: State;
+    @BelongsTo(() => AdminArea)
+    state: AdminArea;
 
     @BelongsToMany(() => City, () => ZipCity)
     cities: City[];

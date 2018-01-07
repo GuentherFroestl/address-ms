@@ -1,9 +1,7 @@
 import * as Koa from 'koa';
-import * as Router from 'koa-router';
 import * as Cors from 'koa2-cors';
 import * as KoaLogger from 'koa-logger';
 import { Server } from 'http';
-import {healthCheck} from '../control';
 import {CountriesResource} from './countries-resource';
 import {ZipsResource} from './zips-resource';
 import {exceptionHandler} from "./exception-handler";
@@ -13,14 +11,19 @@ import {DistrictsResource} from "./districts-resource";
 import {LocationsResource} from "./locations-resource";
 import {StreetsResource} from "./streets-resource";
 import {SubLocationsResource} from "./sub-locations-resource";
+import {AreaTypesResource} from "./area-types-resource";
+import {AdminAreasResource} from "./admin-areas-resource";
+import {HealthCheckResource} from "./health-check-resource";
 
-const mainRouter = new Router();
 
 
 export class AddressService{
 
     protected restApp: Koa;
     protected service: Server;
+    protected healthCheckResource = new HealthCheckResource('/healthcheck');
+    protected areaTypesResource = new AreaTypesResource('/area-types');
+    protected adminAreasResource = new AdminAreasResource('admin-areas');
     protected countriesResource = new CountriesResource('/countries');
     protected cityResource= new CitiesResource('/cities');
     protected zipsResource = new ZipsResource('/zips');
@@ -34,11 +37,11 @@ export class AddressService{
 
         this.restApp = new Koa();
 
-        mainRouter.get('/healthcheck', healthCheck);
 
-        const paramLoggingMW = async(ctx,ntx) =>{
+        const paramLoggingMW = async(ctx,next) =>{
             console.log('parameters:',ctx.params);
             console.log('query', ctx.query);
+            await next();
         };
 
         this.restApp
@@ -58,8 +61,12 @@ export class AddressService{
                     'Location'
                 ]
             }))
-            .use(mainRouter.routes())
-            .use(mainRouter.allowedMethods())
+            .use(this.healthCheckResource.router.routes())
+            .use(this.healthCheckResource.router.allowedMethods())
+            .use(this.areaTypesResource.router.routes())
+            .use(this.areaTypesResource.router.allowedMethods())
+            .use(this.adminAreasResource.router.routes())
+            .use(this.adminAreasResource.router.allowedMethods())
             .use(this.cityResource.router.routes())
             .use(this.cityResource.router.allowedMethods())
             .use(this.countriesResource.router.routes())
@@ -76,7 +83,6 @@ export class AddressService{
             .use(this.subLocationsResource.router.allowedMethods())
             .use(this.zipsResource.router.routes())
             .use(this.zipsResource.router.allowedMethods())
-
             .use(paramLoggingMW)
         ;
     }
