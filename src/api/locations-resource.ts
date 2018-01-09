@@ -1,5 +1,5 @@
 import {AbstractStore, LocationsStore} from "../control";
-import {Location, DomainQuery} from "../entity";
+import {Location} from "../entity";
 import {AbstractResource} from "./abstract-resource";
 
 export class LocationsResource extends AbstractResource<Location>{

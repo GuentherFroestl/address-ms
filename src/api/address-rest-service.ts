@@ -14,6 +14,7 @@ import {SubLocationsResource} from "./sub-locations-resource";
 import {AreaTypesResource} from "./area-types-resource";
 import {AdminAreasResource} from "./admin-areas-resource";
 import {HealthCheckResource} from "./health-check-resource";
+import {AddressesResource} from "./addresses-resource";
 
 
 
@@ -32,6 +33,7 @@ export class AddressService{
     protected locationsResource = new LocationsResource('/locations');
     protected streetsResource = new StreetsResource('/streets');
     protected subLocationsResource = new SubLocationsResource('/sub-locations');
+    protected addressesResource = new AddressesResource('/addresses');
 
     constructor(protected port = 3000) {
 
@@ -83,6 +85,8 @@ export class AddressService{
             .use(this.subLocationsResource.router.allowedMethods())
             .use(this.zipsResource.router.routes())
             .use(this.zipsResource.router.allowedMethods())
+            .use(this.addressesResource.router.routes())
+            .use(this.addressesResource.router.allowedMethods())
             .use(paramLoggingMW)
         ;
     }

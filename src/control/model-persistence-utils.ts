@@ -1,15 +1,16 @@
 import {Sequelize} from 'sequelize-typescript';
-import {Country} from './country.model';
-import {Zip} from './zip.model';
-import {Street} from './street.model';
-import {City} from './city.model';
-import {ZipCity} from './zip-city.model';
-import {Direction} from './direction.model';
-import {Location} from './location.model';
-import {District} from './district.model';
-import {SubLocation} from './sub-location';
-import {AdminArea} from "./admin-area.model";
-import {AreaType} from "./area-type.model";
+import {Country} from '../entity';
+import {Zip} from '../entity';
+import {Street} from '../entity';
+import {City} from '../entity';
+import {ZipCity} from '../entity';
+import {Direction} from '../entity';
+import {Location} from '../entity';
+import {District} from '../entity';
+import {SubLocation} from '../entity';
+import {AdminArea} from "../entity";
+import {AreaType} from "../entity";
+import {Address} from "../entity";
 
 export function addAllModels(seq: Sequelize):void{
     console.log('add models to Sequelize');
@@ -24,7 +25,8 @@ export function addAllModels(seq: Sequelize):void{
         ZipCity, 
         Direction,
         Location,
-        SubLocation
+        SubLocation,
+        Address
     ]);
 }
 

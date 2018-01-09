@@ -1,5 +1,5 @@
 import {Sequelize} from 'sequelize-typescript';
-import {addAllModels, syncAllModels} from '../entity';
+import {addAllModels, syncAllModels} from '../control';
 
 const config = {
     database: 'some_db',

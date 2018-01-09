@@ -4,7 +4,6 @@ export * from './area-type.model'
 export * from './admin-area.model';
 export * from './zip.model';
 export * from './database-specification';
-export * from './model-utils';
 export * from './city.model';
 export * from './direction.model';
 export * from './district.model';
@@ -12,3 +11,5 @@ export * from './street.model';
 export * from './location.model';
 export * from './sub-location';
 export * from './domian-query';
+export * from './address.model';
+export * from './zip-city.model';
