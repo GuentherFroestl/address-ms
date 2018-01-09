@@ -18,7 +18,7 @@ import {AddressesResource} from "./addresses-resource";
 
 
 
-export class AddressService{
+export class AddressesRestService{
 
     protected restApp: Koa;
     protected service: Server;
@@ -93,7 +93,7 @@ export class AddressService{
 
     listen = () => {
         this.service = this.restApp.listen(this.port, () => {
-            console.info(`Address REST Service started on http://localhost:${this.port}`);
+            console.info(`Addresses REST Service started on http://localhost:${this.port}`);
         });
     };
     close = () => {

@@ -1,13 +1,16 @@
 import {
-    Table, Column, Unique, BelongsTo, ForeignKey, HasOne, Model, UpdatedAt, PrimaryKey,
-    IsUUID, CreatedAt, AllowNull
+    Table, Column, BelongsTo, ForeignKey, Model, UpdatedAt, PrimaryKey,
+    IsUUID, CreatedAt, AllowNull, BelongsToMany, Sequelize
 } from 'sequelize-typescript';
 import {BaseEntity} from './base-entity.model';
 import {Street} from './street.model';
 import {Direction} from './direction.model';
+import {SubLocation} from "./sub-location.model";
+import {LocationSubLocation} from "./location-sub-location";
+import {GeoCoordinate} from "./geo-coordinate.model";
 
 @Table
-export class Location extends Model<Location> implements  BaseEntity{
+export class Location extends Model<Location> implements  BaseEntity, GeoCoordinate{
 
     @AllowNull(false)
     @IsUUID(4)
@@ -27,6 +30,12 @@ export class Location extends Model<Location> implements  BaseEntity{
     @Column
     number: string;
 
+    @Column(Sequelize.DECIMAL(4, 13))
+    latitude: number;
+
+    @Column(Sequelize.DECIMAL(4, 13))
+    longitude: number;
+
     @AllowNull(false)
     @ForeignKey(() => Street)
     @Column
@@ -41,4 +50,7 @@ export class Location extends Model<Location> implements  BaseEntity{
 
     @BelongsTo(() => Direction)
     direction: Direction;
+
+    @BelongsToMany(() => SubLocation, () => LocationSubLocation)
+    subLocations: SubLocation[]
 }

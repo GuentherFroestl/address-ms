@@ -1,12 +1,13 @@
 import {
     Table, Column, ForeignKey, BelongsTo, Model, UpdatedAt, PrimaryKey, IsUUID,
-    CreatedAt, AllowNull, BelongsToMany
+    CreatedAt, AllowNull, BelongsToMany, HasMany
 } from 'sequelize-typescript';
 import {BaseEntity} from './base-entity.model';
 import {Country} from './country.model';
 import {AdminArea} from "./admin-area.model";
 import {ZipCity} from "./zip-city.model";
 import {Zip} from "./zip.model";
+import {Street} from "./street.model";
 
 @Table
 export class City extends Model<City> implements BaseEntity{
@@ -44,4 +45,7 @@ export class City extends Model<City> implements BaseEntity{
 
     @BelongsTo(() => AdminArea)
     adminArea: AdminArea;
+
+    @HasMany(()=> Street, 'cityUuid')
+    streets: Street[]
 }

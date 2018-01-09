@@ -9,7 +9,8 @@ export * from './direction.model';
 export * from './district.model';
 export * from './street.model';
 export * from './location.model';
-export * from './sub-location';
+export * from './sub-location.model';
 export * from './domian-query';
 export * from './address.model';
 export * from './zip-city.model';
+export * from './geo-coordinate.model'

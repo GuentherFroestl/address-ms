@@ -1,11 +1,12 @@
 import {
     Table, Column, ForeignKey, BelongsTo, Model, UpdatedAt, PrimaryKey, IsUUID,
-    CreatedAt, AllowNull
+    CreatedAt, AllowNull, HasMany
 } from 'sequelize-typescript';
 import {BaseEntity} from './base-entity.model';
 import {Zip} from './zip.model';
 import {District} from './district.model';
 import {City} from "./city.model";
+import {Location} from "./location.model";
 
 @Table
 export class Street extends Model<Street> implements BaseEntity{
@@ -47,4 +48,7 @@ export class Street extends Model<Street> implements BaseEntity{
 
     @BelongsTo(() => District)
     district: District;
+
+    @HasMany(() => Location, 'streetUuid')
+    locations: Location[]
 }

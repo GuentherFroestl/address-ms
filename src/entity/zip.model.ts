@@ -1,12 +1,13 @@
 import {
     Table, Column, ForeignKey, BelongsTo, BelongsToMany, Model, UpdatedAt, PrimaryKey,
-    IsUUID, CreatedAt, Length, AllowNull
+    IsUUID, CreatedAt, Length, AllowNull, HasMany
 } from 'sequelize-typescript';
 import {BaseEntity} from './base-entity.model';
 import {Country} from './country.model';
 import {City} from './city.model';
 import {ZipCity} from './zip-city.model';
 import {AdminArea} from "./admin-area.model";
+import {Street} from "./street.model";
 
 @Table
 export class Zip extends Model<Zip> implements BaseEntity {
@@ -45,5 +46,8 @@ export class Zip extends Model<Zip> implements BaseEntity {
 
     @BelongsToMany(() => City, () => ZipCity)
     cities: City[];
+
+    @HasMany(()=> Street, 'zipUuid')
+    streets: Street[]
 
 }

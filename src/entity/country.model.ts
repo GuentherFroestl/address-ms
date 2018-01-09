@@ -1,8 +1,10 @@
 import {BaseEntity} from './base-entity.model';
 import {
     Table, Column, Unique, Model, UpdatedAt, PrimaryKey, IsUUID, CreatedAt,
-    AllowNull
+    AllowNull, HasMany
 } from 'sequelize-typescript';
+import {City} from "./city.model";
+import {Zip} from "./zip.model";
 
 @Table
 export class Country extends Model<Country> implements BaseEntity{
@@ -34,6 +36,12 @@ export class Country extends Model<Country> implements BaseEntity{
     @Unique
     @Column
     isoNumber: number;
+
+    @HasMany(() => City, 'countryUuid')
+    cities: City[]
+
+    @HasMany(() => Zip, 'countryUuid')
+    zips: Zip[]
 
 
 

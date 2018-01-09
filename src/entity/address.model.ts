@@ -9,7 +9,7 @@ import {Zip} from "./zip.model";
 import {Country} from "./country.model";
 import {District} from "./district.model";
 import {Location} from "./location.model";
-import {SubLocation} from "./sub-location";
+import {SubLocation} from "./sub-location.model";
 
 @Table
 export class Address extends Model<Address> implements BaseEntity{
@@ -104,5 +104,5 @@ export class Address extends Model<Address> implements BaseEntity{
     subLocation: SubLocation;
 
     @Column
-    subLocationName: string;
+    subLocationNames: string;
 }

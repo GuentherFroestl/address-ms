@@ -11,6 +11,7 @@ import {SubLocation} from '../entity';
 import {AdminArea} from "../entity";
 import {AreaType} from "../entity";
 import {Address} from "../entity";
+import {LocationSubLocation} from "../entity/location-sub-location";
 
 export function addAllModels(seq: Sequelize):void{
     console.log('add models to Sequelize');
@@ -26,6 +27,7 @@ export function addAllModels(seq: Sequelize):void{
         Direction,
         Location,
         SubLocation,
+        LocationSubLocation,
         Address
     ]);
 }
