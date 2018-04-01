@@ -1,8 +1,8 @@
 import {AbstractStore, CountryStore} from "../control";
 import {Country, DomainQuery} from "../entity";
-import {AbstractResource} from "./abstract-resource";
+import {AbstractStoreResource} from "./abstract-store-resource";
 
-export class CountriesResource extends AbstractResource<Country>{
+export class CountriesResource extends AbstractStoreResource<Country>{
 
     protected getStore(): AbstractStore<Country> {
         return new CountryStore();

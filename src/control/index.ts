@@ -10,4 +10,5 @@ export * from './sub-locations-store';
 export * from './directions-store';
 export * from './addresses-store';
 export * from './model-persistence-utils';
+export * from './google-places-access-mw';
 

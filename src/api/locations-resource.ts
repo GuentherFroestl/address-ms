@@ -1,8 +1,8 @@
 import {AbstractStore, LocationsStore} from "../control";
 import {Location} from "../entity";
-import {AbstractResource} from "./abstract-resource";
+import {AbstractStoreResource} from "./abstract-store-resource";
 
-export class LocationsResource extends AbstractResource<Location>{
+export class LocationsResource extends AbstractStoreResource<Location>{
 
     protected getStore(): AbstractStore<Location> {
         return new LocationsStore();

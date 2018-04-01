@@ -1,8 +1,8 @@
 import {AbstractStore, DirectionsStore} from "../control";
 import {Direction} from "../entity";
-import {AbstractResource} from "./abstract-resource";
+import {AbstractStoreResource} from "./abstract-store-resource";
 
-export class DirectionsResource extends AbstractResource<Direction>{
+export class DirectionsResource extends AbstractStoreResource<Direction>{
 
     protected getStore(): AbstractStore<Direction> {
         return new DirectionsStore();

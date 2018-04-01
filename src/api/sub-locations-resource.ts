@@ -1,8 +1,8 @@
 import {AbstractStore, SubLocationsStore} from "../control";
 import {SubLocation} from "../entity";
-import {AbstractResource} from "./abstract-resource";
+import {AbstractStoreResource} from "./abstract-store-resource";
 
-export class SubLocationsResource extends AbstractResource<SubLocation>{
+export class SubLocationsResource extends AbstractStoreResource<SubLocation>{
 
     protected getStore(): AbstractStore<SubLocation> {
         return new SubLocationsStore();

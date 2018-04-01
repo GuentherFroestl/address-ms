@@ -1,8 +1,8 @@
 import {AbstractStore, StreetsStore} from "../control";
 import {Street} from "../entity";
-import {AbstractResource} from "./abstract-resource";
+import {AbstractStoreResource} from "./abstract-store-resource";
 
-export class StreetsResource extends AbstractResource<Street>{
+export class StreetsResource extends AbstractStoreResource<Street>{
 
     protected getStore(): AbstractStore<Street> {
         return new StreetsStore();

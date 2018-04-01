@@ -5,7 +5,7 @@ import * as KoaBody from 'koa-body';
 
 const koaBody = KoaBody();
 
-export abstract class AbstractResource<T extends BaseEntity>{
+export abstract class AbstractStoreResource<T extends BaseEntity>{
 
     protected abstract getStore(): AbstractStore<T>;
     public router: KoaRouter;

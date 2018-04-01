@@ -38,7 +38,7 @@ export class Country extends Model<Country> implements BaseEntity{
     isoNumber: number;
 
     @HasMany(() => City, 'countryUuid')
-    cities: City[]
+    cities: City[];
 
     @HasMany(() => Zip, 'countryUuid')
     zips: Zip[]

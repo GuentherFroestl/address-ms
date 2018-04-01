@@ -15,6 +15,7 @@ import {AreaTypesResource} from "./area-types-resource";
 import {AdminAreasResource} from "./admin-areas-resource";
 import {HealthCheckResource} from "./health-check-resource";
 import {AddressesResource} from "./addresses-resource";
+import {GooglePlacesResource} from "./google-places-resource";
 
 
 
@@ -34,6 +35,7 @@ export class AddressesRestService{
     protected streetsResource = new StreetsResource('/streets');
     protected subLocationsResource = new SubLocationsResource('/sub-locations');
     protected addressesResource = new AddressesResource('/addresses');
+    protected googlePlacesResource = new GooglePlacesResource('/places/google');
 
     constructor(protected port = 3000) {
 
@@ -87,6 +89,8 @@ export class AddressesRestService{
             .use(this.zipsResource.router.allowedMethods())
             .use(this.addressesResource.router.routes())
             .use(this.addressesResource.router.allowedMethods())
+            .use(this.googlePlacesResource.router.routes())
+            .use(this.googlePlacesResource.router.allowedMethods())
             .use(paramLoggingMW)
         ;
     }
